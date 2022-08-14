@@ -29,7 +29,6 @@
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="<?= base_url('assets_user/css/style.css');?>">
-
 </head>
 
 <body id="top">

@@ -10,7 +10,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA"></script>
     <script src="<?= base_url('assets_user/plugins/google-map/gmap.js');?>"></script>
     
-    <script src="<?= base_url('assets_user/js/script.js"></script>');?>"></script>
+    <script src="<?= base_url('assets_user/js/script.js">');?>"></script>
 
   </body>
   </html>

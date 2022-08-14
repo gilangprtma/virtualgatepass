@@ -16,7 +16,7 @@
                     <a href="<?= base_url('surat'); ?>" class="btn btn-main-2 btn-icon btn-round-full">Buat Surat <i class="icofont-simple-right ml-2  "></i></a>
                 </div>
 
-                <p class=" mt-4 mb-4 pr-5" style="font-family: Poppins, sans-serif; color:black;">Atau ingin melihat status surat anda :</p>
+                <p class=" mt-4 mb-9 pr-5" style="font-family: Poppins, sans-serif; color:black;">Atau ingin melihat status surat anda :</p>
                 <div class="btn-container ">
                     <a href="#" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">Lihat Status Surat <i class="icofont-simple-right ml-2"></i></a>
                 </div>
