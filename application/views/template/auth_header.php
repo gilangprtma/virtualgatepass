@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css');?>">
     <!-- Custom Stylesheet -->
     <link href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
+    <link href="<?= base_url('plugins/tables/css/datatable/dataTables.bootstrap4.min.css');?>" rel="stylesheet">
 
 </head>
 
