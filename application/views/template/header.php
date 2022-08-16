@@ -32,7 +32,6 @@
 </head>
 
 <body id="top">
-    
 <!--<header>
 	<nav class="navbar navbar-expand-lg navigation" id="navbar">
 		<div class="container">

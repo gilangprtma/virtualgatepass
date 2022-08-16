@@ -2,6 +2,7 @@
     <a href="<?= base_url('welcome'); ?>">
         <img src="<?= base_url('assets/images/patra.png'); ?>" alt="" class="img-fluid" style="width: 200px;">
     </a>
+    
     <div class="row justify-content-center">
         <div class="col-lg-7">
             <div class="appoinment-wrap mt-5 mt-lg-0">

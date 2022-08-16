@@ -6,7 +6,6 @@ class Surat extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('tgl_indo');
-        is_logged_in();
     }
 
 	public function index()
@@ -27,15 +26,5 @@ class Surat extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function listgatepassmasuk()
-	{
-		$data['title'] = 'Lihat Gate Pass Masuk';
-
-		$this->load->view('template/auth_header', $data);
-		$this->load->view('template/head', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('surat/listgatepassmasuk');
-		$this->load->view('template/foot');
-		$this->load->view('template/auth_footer');
-	}
+	
 }
