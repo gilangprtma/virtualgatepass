@@ -79,7 +79,7 @@
                         </div>
                     </div>
 
-                    <a class="btn btn-main btn-round-full mb-3" href="appoinment.html">Simpan </a>
+                    <button type="submit" class="btn btn-secondary btn-lg mb-5" style="background-image:linear-gradient(6deg, #17ffd3 0%, #23e3ee 100%) ;">Submit</button>
                 </form>
             </div>
         </div>

@@ -31,32 +31,32 @@
                                                     <th style="width: 200px;">Gate Pass Nomor</th>
                                                     <th style="width: 45px;">:</th>
                                                     <th>730/GP/Q24046/VII/2022</th>
-                                                    <th>Tanggal 02 Agustus 2022</th>
+                                                    <th><?= date_indo($ms['tanggal_permohonan']); ?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Dasar</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th>PO No. 3950196831</th>
+                                                    <th><?= $ms['dasar_pengiriman'];?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Pekerjaan</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th>Sertifikasi Tanki Timbun</th>
+                                                    <th><?= $ms['pekerjaan'];?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Dari</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th>PT. Bensindo Pratama</th>
+                                                    <th><?= $ms['dari'];?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Untuk dikirim ke</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th>PT. Pertamina Patra Niaga FT Lomanis</th>
+                                                    <th><?= $ms['kepada'];?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Atas tanggungan</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th>PT. Bensindo Pratama</th>
+                                                    <th><?= $ms['dari'];?></th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -79,10 +79,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
-                                                    <td>1</td>
-                                                    <td>Unit</td>
-                                                    <td>Analytical Balance</td>
-                                                    <td>Alat Kerja</td>
+                                                    <td><?= $ms['jumlah'];?></td>
+                                                    <td><?= $ms['unit'];?></td>
+                                                    <td><?= $ms['nama_barang'];?></td>
+                                                    <td><?= $ms['keterangan'];?></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -187,9 +187,18 @@
                                     </div>
                                 </div>
                             </div>-->
-                            <div class="card-body">
-                                <a href="#" class="btn btn-primary">Setujui</a>
-                            </div>
+                            <?php 
+                            if($ms['status']=='1'){?>
+                                <div class="card-body">
+                                    <a href="<?= base_url('admin/approvemasukmps/'.$ms['id']);?>" class="btn btn-primary">Setujui</a>
+                                </div>
+                            <?php }else{ ?>
+                                <div class="card-body">
+                                    <button type="button" class="btn mb-1 btn-primary" disabled="disabled">Setujui</button>
+                                </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>

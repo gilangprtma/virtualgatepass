@@ -6,6 +6,7 @@ class Admin extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('tgl_indo');
+		$this->load->model('Admin_model');
         //is_logged_in();
     }
 
@@ -25,6 +26,9 @@ class Admin extends CI_Controller {
 	public function listgatepassmasuk()
 	{
 		$data['title'] = 'Lihat Gate Pass Masuk';
+
+		$this->load->model('Admin_model', 'listmasuk');
+        $data['listmasuk'] = $this->listmasuk->getListMasuk();
 
 		$this->load->view('template/auth_header', $data);
 		$this->load->view('template/head', $data);
@@ -46,16 +50,68 @@ class Admin extends CI_Controller {
 		$this->load->view('template/auth_footer');
 	}
 
-	public function detailgatepassmasuk()
+	public function detailgatepassmasuk($id)
 	{
 		$data['title'] = 'Detail Gate Pass Masuk';
+
+		$data['ms'] = $this->Admin_model->getById($id);
 
 		$this->load->view('template/auth_header', $data);
 		$this->load->view('template/head', $data);
 		$this->load->view('template/sidebar', $data);
-		$this->load->view('surat/detailgatepassmasuk');
+		$this->load->view('surat/detailgatepassmasuk', $data);
 		$this->load->view('template/foot');
 		$this->load->view('template/auth_footer');
+	}
+
+	public function approvemasukmps($id)
+	{
+		$this->Admin_model->appMasukMPS($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
+        redirect('admin/listgatepassmasuk');
+	}
+
+	public function approvemasukftm($id)
+	{
+		$id = $this->input->post('id') ? $this->input->post('id') : 0;
+		//Xxx/PND74B000/DS/mm/yyyy
+		$tahun = date('Y');
+		$sql_get_number = "SELECT no AS number FROM tbl_bantu_no WHERE tahun = '$tahun' LIMIT 1";
+		$get_number = $this->db->query($sql_get_number);
+		if ($get_number->num_rows() > 0) {
+			$number = $get_number->row()->number;
+			$number_to_update = $number + 1;
+
+			$data_update = array(
+				'no' => $number_to_update,
+				'update_at' => date('Y-m-d H:i:s'),
+			);
+			$this->db->where('tahun', $tahun);
+			$this->db->update('tbl_bantu_no', $data_update);
+
+			$number = sprintf("%03d", $number + 1);
+		} else {
+			$number = sprintf("%03d", 1);
+			$number_to_insert = 1;
+
+			$data_insert = array(
+				'no' => $number_to_insert,
+				'tahun' => date('Y'),
+				'created_at' => date('Y-m-d H:i:s'),
+			);
+			$this->db->insert('tbl_bantu_no', $data_insert);
+		}
+
+		$nomor_surat = $number . "/GA/RWL/" . date('m') . '/' . date('Y');
+		$data_update_surat = array(
+			'no_gatepass' => $nomor_surat
+		);
+		$this->db->where('id', $id);
+		$this->db->update('gatepassmasuk', $data_update_surat);
+
+		$this->Admin_model->appMasukFTM($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
+        redirect('admin/listgatepassmasuk');
 	}
 
 	public function detailgatepasskeluar()

@@ -13,12 +13,12 @@
 
                 <p class="mb-4 pr-5" style="font-family: Poppins, sans-serif; color:black;">Silahkan mengisi <strong>SURAT IZIN MEMBAWA MASUK / KELUAR BARANG MATERIAL / ASSET </strong>melalui link dibawah ini :</p>
                 <div class="btn-container ">
-                    <a href="<?= base_url('surat'); ?>" class="btn btn-main-2 btn-icon btn-round-full">Buat Surat <i class="icofont-simple-right ml-2  "></i></a>
+                    <a href="<?= base_url('surat'); ?>" class="btn btn-primary ml-lg-3 primary-shadow">Buat Surat <i class="icofont-simple-right ml-2  "></i></a>
                 </div>
 
                 <p class=" mt-4 mb-9 pr-5" style="font-family: Poppins, sans-serif; color:black;">Atau ingin melihat status surat anda :</p>
                 <div class="btn-container ">
-                    <a href="#" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">Lihat Status Surat <i class="icofont-simple-right ml-2"></i></a>
+                    <a href="#" target="_blank" class="btn btn-primary ml-lg-3 primary-shadow">Lihat Status Surat <i class="icofont-simple-right ml-2"></i></a>
                 </div>
             </div>
         </div>
