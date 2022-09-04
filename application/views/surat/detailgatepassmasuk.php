@@ -90,109 +90,17 @@
                                 </div>
                             </div>
                             
-                            <!--<div class="col-lg-12">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center;">Diketahui Oleh :</th>
-                                                    <th style="text-align: center;">Yang Menerima :</th>
-                                                    <th style="text-align: center;">Mengetahui :</th>
-                                                    <th style="text-align: center;">Diserahkan Oleh :</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th style="text-align: center;">Sr. Spv. HSSE</th>
-                                                    <th style="text-align: center;">Sr. Spv. Maint. Plan. & Service</th>
-                                                    <th style="text-align: center;">Fuel Terminal Manager</th>
-                                                    <th style="text-align: center;">Analytical Balance</th>
-                                                </tr>
-                                                <tr>
-                                                    <th style="text-align: center;">FT Lomanis</th>
-                                                    <th style="text-align: center;">FT Lomanis</th>
-                                                    <th style="text-align: center;">FT Lomanis</th>
-                                                    <th style="text-align: center;">PT. Benisindo Pratama</th>
-                                                </tr>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <th style="text-align: center;">Budi Yulianto</th>
-                                                    <th style="text-align: center;">Ajik Putra K</th>
-                                                    <th style="text-align: center;">Rahmad Febriadi</th>
-                                                    <th style="text-align: center;">Miko</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center;" colspan="3">Diisi oleh bagian :</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th style="text-align: center;" colspan="3">Ekspedisi / Gate Keeper</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>No. Urut</th>
-                                                    <th>:</th>
-                                                    <th>......</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>Diangkut tanggal</th>
-                                                    <th>:</th>
-                                                    <th>......</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>Nopol Kendaraan</th>
-                                                    <th>:</th>
-                                                    <th>......</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>Sopir</th>
-                                                    <th>:</th>
-                                                    <th>......</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>Jam</th>
-                                                    <th>:</th>
-                                                    <th>......</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>-->
                             <?php 
-                            if($ms['status']=='1'){?>
+                            if($ms['status']==0&$user['role_id']==2){ ?>
+                                <div class="card-body">
+                                    <a href="<?= base_url('admin/approvemasukhsse/'.$ms['id']);?>" class="btn btn-primary">Setujui</a>
+                                </div>
+                            <?php }elseif($ms['status']==1&$user['role_id']==1){ ?>
                                 <div class="card-body">
                                     <a href="<?= base_url('admin/approvemasukmps/'.$ms['id']);?>" class="btn btn-primary">Setujui</a>
                                 </div>
-                            <?php }else{ ?>
+                                <?php
+                            }else{?>
                                 <div class="card-body">
                                     <button type="button" class="btn mb-1 btn-primary" disabled="disabled">Setujui</button>
                                 </div>

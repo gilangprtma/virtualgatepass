@@ -52,7 +52,15 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="<?= base_url('admin/detailgatepassmasuk/'.$m['id']);?>" class="text-warning">Detail</a>
+                                                <a href="<?= base_url('admin/detailgatepassmasuk/'.$m['id']);?>" class="text-warning">Detail</a> 
+                                                <?php 
+                                                    if($user['role_id']==1){?>
+                                                        |<a href="<?= base_url('cetak/index/'.$m['id']);?>" class="text-success">Print</a>
+                                                    <?php }else {
+                                                        
+                                                    }
+                                                ?> 
+                                                
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

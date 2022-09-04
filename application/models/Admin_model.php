@@ -17,7 +17,18 @@ class Admin_model extends CI_Model
     public function appMasukMPS($id)
     {
         $data = [
-            'status' => '2'
+            'status' => '2',
+            'app_mps' => time()
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('gatepassmasuk', $data);
+    }
+
+    public function appMasukHSSE($id)
+    {
+        $data = [
+            'status' => '1',
+            'app_hsse' => time()
         ];
         $this->db->where('id', $id);
         $this->db->update('gatepassmasuk', $data);
@@ -26,7 +37,8 @@ class Admin_model extends CI_Model
     public function appMasukFTM($id)
     {
         $data = [
-            'status' => '3'
+            'status' => '3',
+            'app_ftm' => time()
         ];
         $this->db->where('id', $id);
         $this->db->update('gatepassmasuk', $data);

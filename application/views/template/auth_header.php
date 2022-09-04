@@ -16,6 +16,14 @@
     <!-- Custom Stylesheet -->
     <link href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
     <link href="<?= base_url('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css');?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+
+    <style type="text/css">
+        body
+        {
+        font-family: 'Poppins';
+        }
+    </style>
 
 </head>
 

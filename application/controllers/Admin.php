@@ -1,14 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Admin extends CI_Controller
+{
 	public function __construct()
-    {
-        parent::__construct();
-        $this->load->helper('tgl_indo');
+	{
+		parent::__construct();
+		$this->load->helper('tgl_indo');
 		$this->load->model('Admin_model');
-        //is_logged_in();
-    }
+		//is_logged_in();
+	}
 
 	public function index()
 	{
@@ -26,9 +27,10 @@ class Admin extends CI_Controller {
 	public function listgatepassmasuk()
 	{
 		$data['title'] = 'Lihat Gate Pass Masuk';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
 		$this->load->model('Admin_model', 'listmasuk');
-        $data['listmasuk'] = $this->listmasuk->getListMasuk();
+		$data['listmasuk'] = $this->listmasuk->getListMasuk();
 
 		$this->load->view('template/auth_header', $data);
 		$this->load->view('template/head', $data);
@@ -53,6 +55,7 @@ class Admin extends CI_Controller {
 	public function detailgatepassmasuk($id)
 	{
 		$data['title'] = 'Detail Gate Pass Masuk';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
 		$data['ms'] = $this->Admin_model->getById($id);
 
@@ -67,8 +70,15 @@ class Admin extends CI_Controller {
 	public function approvemasukmps($id)
 	{
 		$this->Admin_model->appMasukMPS($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
-        redirect('admin/listgatepassmasuk');
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
+		redirect('admin/listgatepassmasuk');
+	}
+
+	public function approvemasukhsse($id)
+	{
+		$this->Admin_model->appMasukHSSE($id);
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
+		redirect('admin/listgatepassmasuk');
 	}
 
 	public function approvemasukftm($id)
@@ -110,8 +120,8 @@ class Admin extends CI_Controller {
 		$this->db->update('gatepassmasuk', $data_update_surat);
 
 		$this->Admin_model->appMasukFTM($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
-        redirect('admin/listgatepassmasuk');
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
+		redirect('admin/listgatepassmasuk');
 	}
 
 	public function detailgatepasskeluar()

@@ -23,7 +23,6 @@ class Surat extends CI_Controller {
         $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'trim|required');
         $this->form_validation->set_rules('unit', 'Unit', 'trim|required');
         $this->form_validation->set_rules('jumlah', 'Jumlah', 'trim|required');
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('template/header', $data);
