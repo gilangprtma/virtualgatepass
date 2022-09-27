@@ -1,23 +1,24 @@
     <!--
     Essential Scripts
     =====================================-->
-    <script src="<?= base_url('assets_user/plugins/jquery/jquery.js');?>"></script>
-    <script src="<?= base_url('assets_user/plugins/bootstrap/bootstrap.min.js');?>"></script>
-    <script src="<?= base_url('assets_user/plugins/slick-carousel/slick/slick.min.js');?>"></script>
-    <script src="<?= base_url('assets_user/plugins/shuffle/shuffle.min.js');?>"></script>
+    <script src="<?= base_url('assets_user/plugins/jquery/jquery.js'); ?>"></script>
+    <script src="<?= base_url('assets_user/plugins/bootstrap/bootstrap.min.js'); ?>"></script>
+    <script src="<?= base_url('assets_user/plugins/slick-carousel/slick/slick.min.js'); ?>"></script>
+    <script src="<?= base_url('assets_user/plugins/shuffle/shuffle.min.js'); ?>"></script>
 
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA"></script>
-    <script src="<?= base_url('assets_user/plugins/google-map/gmap.js');?>"></script>
-    
-    <script src="<?= base_url('assets_user/js/script.js">');?>"></script>
-    
+    <script src="<?= base_url('assets_user/plugins/google-map/gmap.js'); ?>"></script>
+
+    <script src="<?= base_url('assets_user/js/script.js">'); ?>"></script>
+
     <script>
       $('.custom-file-input').on('change', function() {
-          let fileName = $(this).val().split('\\').pop();
-          $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
       });
     </script>
 
-  </body>
-  </html>
+    </body>
+
+    </html>

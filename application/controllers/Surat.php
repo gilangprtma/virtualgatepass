@@ -1,17 +1,18 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Surat extends CI_Controller {
-	public function __construct()
+class Surat extends CI_Controller
+{
+    public function __construct()
     {
         parent::__construct();
         $this->load->model('Surat_model');
         $this->load->helper('tgl_indo');
     }
 
-	public function index()
-	{
-		$data['title'] = 'Tambah Gate Pass Masuk';
+    public function index()
+    {
+        $data['title'] = 'Tambah Gate Pass Masuk';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
@@ -48,16 +49,14 @@ class Surat extends CI_Controller {
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disimpan</div>');
             redirect('surat');
         }
-	}
+    }
 
-	public function gatepasskeluar()
-	{
-		$data['title'] = 'Gate Pass Masuk / Keluar';
+    public function gatepasskeluar()
+    {
+        $data['title'] = 'Gate Pass Masuk / Keluar';
 
-		$this->load->view('template/header', $data);
-		$this->load->view('surat/gatepasskeluar');
-		$this->load->view('template/footer');
-	}
-
-	
+        $this->load->view('template/header', $data);
+        $this->load->view('surat/gatepasskeluar');
+        $this->load->view('template/footer');
+    }
 }

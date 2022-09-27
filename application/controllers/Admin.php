@@ -15,6 +15,8 @@ class Admin extends CI_Controller
 	{
 		$data['title'] = 'Selamat datang dihalaman admin';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['hitung'] = $this->Admin_model->hitungGatePassMasuk();
+		$data['hitunguser'] = $this->Admin_model->hitungUser();
 
 		$this->load->view('template/auth_header', $data);
 		$this->load->view('template/head', $data);

@@ -11,7 +11,7 @@
             <div class="appoinment-wrap mt-5 mt-lg-0">
                 <h2 class="mb-2 title-color text-center" style="font-size: 2rem; font-family: Poppins, sans-serif; color:black;">GATE PASS MASUK</h2>
                 <p class="mb-4 text-center" style="font-family: Poppins, sans-serif; color:black;">Silahkan isi data berikut untuk kelengkapan pengantar surat Gate Pass <a href="<?= base_url('surat'); ?>">Masuk</a> / <a href="<?= base_url('surat/gatepasskeluar'); ?>">Keluar</a> :</p>
-                <?= form_open_multipart(''); ?>
+                <form method="POST" action="" id="add_gatepassmasuk">
                 <div class="card-body" style="font-family: Poppins, sans-serif; color:black;">
                     <div class="row">
                         <div class="col-lg-12">
@@ -52,7 +52,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="form-label">Kepada</label>
-                                <input type="text" id="kepada" class="form-control" placeholder="PT. Pertamina Patra Niaga FT Lomanis" disabled>
+                                <input type="text" id="kepada" class="form-control" placeholder="PT. Pertamina Patra Niaga FT Lomanis" name="kepada" disabled>
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                         <div class="col-lg-3">
                             <label for="form-label">Nama Barang</label>
                             <div class="form-group">
-                                <input type="text" id="nama_barang" class="form-control" name="nama_barang" value="<?= set_value('nama_barang'); ?>">
+                                <input type="text" id="nama_barang" class="form-control" name="nama_barang[]" value="<?= set_value('nama_barang'); ?>">
                                 <?= form_error('nama_barang', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="form-label">Unit</label>
-                                <input type="text" id="unit" class="form-control" name="unit" value="<?= set_value('unit'); ?>">
+                                <input type="text" id="unit" class="form-control" name="unit[]" value="<?= set_value('unit'); ?>">
                                 <?= form_error('unit', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="form-label">Jumlah</label>
-                                <input type="text" id="jumlah" class="form-control" name="jumlah" value="<?= set_value('jumlah'); ?>">
+                                <input type="text" id="jumlah" class="form-control" name="jumlah[]" value="<?= set_value('jumlah'); ?>">
                                 <?= form_error('jumlah', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                         </div>
@@ -173,28 +173,34 @@
             $(this).parents(".form-row").remove();
         });
 
-        $('#add_checklist').on('submit', function(e) {
+        $('#add_gatepassmasuk').on('submit', function(e) {
             e.preventDefault();
 
-            var id = $('#id_mobil').val();
-            var temuan = [];
-            var kategori = [];
-            var batas = [];
+            var nama = $('#nama').val();
+            var email = $('#email').val();
+            var tanggal_permohonan = $('#tanggal_permohonan').val();
+            var dari = $('#dari').val();
+            var kepada = $('#kepada').val();
+            var dasar_pengiriman = $('#dasar_pengiriman').val();
+            var pekerjaan = $('#pekerjaan').val();
+            var nama_barang = [];
+            var unit = [];
+            var jumlah = [];
 
-            $("input[name='temuan[]']").map(function() {
-                temuan.push($(this).val());
+            $("input[name='nama_barang[]']").map(function() {
+                nama_barang.push($(this).val());
             }).get();
 
-            $("select[name='kategori[]']").map(function() {
-                kategori.push($(this).val());
+            $("select[name='unit[]']").map(function() {
+                unit.push($(this).val());
             }).get();
 
-            $("input[name='batas[]']").map(function() {
-                batas.push($(this).val());
+            $("input[name='jumlah[]']").map(function() {
+                jumlah.push($(this).val());
             }).get();
 
             $.ajax({
-                url: '<?= base_url('checklist/saveChecklist'); ?>',
+                url: '<?= base_url('surat/saveChecklist'); ?>',
                 method: "POST",
                 data: {
                     id: id,

@@ -5,6 +5,10 @@ class Surat_model extends CI_Model
 {
     public function addGatepassmasuk($data)
     {
+        $nama_barang = implode(',', $this->input->post('nama_barang', true));
+        $unit = implode(',', $this->input->post('unit', true));
+        $jumlah = implode(',', $this->input->post('jumlah', true));
+
         $data = [
             'nama' => htmlspecialchars($this->input->post('nama', true)),
             'email' => htmlspecialchars($this->input->post('email', true)),
@@ -16,11 +20,8 @@ class Surat_model extends CI_Model
             'nama_barang' => htmlspecialchars($this->input->post('nama_barang', true)),
             'unit' => htmlspecialchars($this->input->post('unit', true)),
             'jumlah' => htmlspecialchars($this->input->post('jumlah', true)),
-            'keterangan' => htmlspecialchars($this->input->post('keterangan', true)),
             'tanggal_dibuat' => time()
         ];
         $this->db->insert('gatepassmasuk', $data);
     }
-
-    
 }

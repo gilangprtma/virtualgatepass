@@ -19,11 +19,10 @@ class Welcome extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 		
 		if ($this->form_validation->run() == false) {
-			
-		$data['title'] = 'Selamat datang Virtual Gate Pass FT Lomanis';
-		$this->load->view('template/header', $data);
-		$this->load->view('index');
-		$this->load->view('template/footer');
+            $data['title'] = 'Selamat datang Virtual Gate Pass FT Lomanis';
+            $this->load->view('template/header', $data);
+            $this->load->view('index');
+            $this->load->view('template/footer');
 		} else {
 			$this->_login();
 		}
@@ -47,8 +46,6 @@ class Welcome extends CI_Controller {
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {
-                        redirect('admin');
-                    } elseif($user['role_id']== 3) {
                         redirect('admin');
                     }else{
                         redirect('admin');

@@ -12,19 +12,20 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">User</h4>
                         <?= $this->session->flashdata('message'); ?>
                         <?= $this->session->unmark_flash('message'); ?>
+                        <h4 class="card-title">User</h4>
+                        <a href="user/adduser" class="btn btn-primary">Tambah User</a><br>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
                                         <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
+                                        <th>Telepon</th>
                                         <th>Role</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,8 +45,17 @@
                                                     }elseif($m['role_id']=='3'){?>
                                                         <span class="text-primary">MPS</span>
                                                     <?php
-                                                    }else{?>
+                                                    }elseif($m['role_id']=='4'){?>
                                                         <span class="text-primary">FTM</span>
+                                                    <?php
+                                                    }elseif($m['role_id']=='5'){?>
+                                                        <span class="text-primary">Pjs MPS</span>
+                                                    <?php
+                                                    }elseif($m['role_id']=='6'){?>
+                                                        <span class="text-primary">Pjs HSSE</span>
+                                                    <?php
+                                                    }else{?>
+                                                        <span class="text-primary">Pjs FTM</span>
                                                     <?php
                                                     }
                                                 ?>
@@ -62,7 +72,7 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="<?= base_url('user/adduser/'.$m['id']);?>" class="text-warning">Edit</a> 
+                                                <a href="<?= base_url('user/edituser/'.$m['id']);?>" class="text-warning">Edit</a> 
                                                 
                                             </td>
                                         </tr>
