@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 function is_logged_in()
 {
     $ci = get_instance();
@@ -21,4 +23,9 @@ function is_logged_in()
             redirect('auth/bloked');
         }
     }
+}
+
+function now_carbon(): Carbon
+{
+    return Carbon::now('GMT+7')->locale('id');
 }
