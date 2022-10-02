@@ -21,27 +21,46 @@ class Surat extends CI_Controller
         $this->form_validation->set_rules('dari', 'Dari', 'required|trim');
         $this->form_validation->set_rules('dasar_pengiriman', 'Dasar Pengiriman', 'trim|required');
         $this->form_validation->set_rules('pekerjaan', 'Pekerjaan', 'trim|required');
-        $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'trim|required');
-        $this->form_validation->set_rules('unit', 'Unit', 'trim|required');
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'trim|required');
+        $this->form_validation->set_rules('nama_barang[]', 'Nama Barang', 'trim|required');
+        $this->form_validation->set_rules('unit[]', 'Unit', 'trim|required');
+        $this->form_validation->set_rules('jumlah[]', 'Jumlah', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('template/header', $data);
             $this->load->view('surat/gatepassmasuk', $data);
             $this->load->view('template/footer');
         } else {
-            $upload_file = $_FILES['upload']['name'];
-            if ($upload_file) {
-                $config['allowed_types'] = 'pdf';
-                $config['max_size'] = '3072';
-                $config['upload_path'] = './assets/upload/';
+            $data = [
+                'nama' => htmlspecialchars($this->input->post('nama', true)),
+                'email' => htmlspecialchars($this->input->post('email', true)),
+                'tanggal_permohonan' => htmlspecialchars($this->input->post('tanggal_permohonan', true)),
+                'dari' => htmlspecialchars($this->input->post('dari', true)),
+                'kepada' => 'PT. Patra Niaga FT Lomanis',
+                'dasar_pengiriman' => htmlspecialchars($this->input->post('dasar_pengiriman', true)),
+                'pekerjaan' => htmlspecialchars($this->input->post('pekerjaan', true)),
 
-                $this->load->library('upload', $config);
-                if ($this->upload->do_upload('upload')) {
-                    $new_file = $this->upload->data('file_name');
-                    $this->db->set('upload', $new_file);
-                } else {
-                    echo $this->upload->display_errors();
+                'nama_barang' => implode(',', $this->input->post('nama_barang')),
+                'unit' => implode(',', $this->input->post('unit')),
+                'jumlah' => implode(',', $this->input->post('jumlah')),
+                'tanggal_dibuat' => now_carbon()->format('Y-m-d'),
+
+                // nomor surat
+                'no_gatepass' => 'G-' . time(),
+            ];
+
+            if (isset($_FILES['file'])) {
+                $upload_file = $_FILES['file']['name'];
+                if ($upload_file) {
+                    $config['allowed_types'] = 'pdf';
+                    $config['max_size'] = '3072';
+                    $config['upload_path'] = './assets/upload/';
+                    
+                    $this->load->library('upload', $config);
+                    if ($this->upload->do_upload('file')) {
+                        $data['upload'] = $this->upload->data('file_name');
+                    } else {
+                        echo $this->upload->display_errors();
+                    }
                 }
             }
 
