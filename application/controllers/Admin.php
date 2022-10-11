@@ -16,6 +16,7 @@ class Admin extends CI_Controller
 		$data['title'] = 'Selamat datang dihalaman admin';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['hitung'] = $this->Admin_model->hitungGatePassMasuk();
+		$data['hitungkeluar'] = $this->Admin_model->hitungGatePassKeluar();
 		$data['hitunguser'] = $this->Admin_model->hitungUser();
 
 		$this->load->view('template/auth_header', $data);
@@ -45,6 +46,10 @@ class Admin extends CI_Controller
 	public function listgatepasskeluar()
 	{
 		$data['title'] = 'Lihat Gate Pass Keluar';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->load->model('Admin_model', 'listkeluar');
+		$data['listkeluar'] = $this->listkeluar->getListKeluar();
 
 		$this->load->view('template/auth_header', $data);
 		$this->load->view('template/head', $data);
@@ -65,6 +70,21 @@ class Admin extends CI_Controller
 		$this->load->view('template/head', $data);
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('surat/detailgatepassmasuk', $data);
+		$this->load->view('template/foot');
+		$this->load->view('template/auth_footer');
+	}
+
+	public function detailgatepasskeluar($id)
+	{
+		$data['title'] = 'Detail Gate Pass Keluar';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$data['ms'] = $this->Admin_model->getByIdK($id);
+
+		$this->load->view('template/auth_header', $data);
+		$this->load->view('template/head', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('surat/detailgatepasskeluar', $data);
 		$this->load->view('template/foot');
 		$this->load->view('template/auth_footer');
 	}
@@ -124,17 +144,5 @@ class Admin extends CI_Controller
 		$this->Admin_model->appMasukFTM($id);
 		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disetujui</div>');
 		redirect('admin/listgatepassmasuk');
-	}
-
-	public function detailgatepasskeluar()
-	{
-		$data['title'] = 'Detail Gate Pass Masuk';
-
-		$this->load->view('template/auth_header', $data);
-		$this->load->view('template/head', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('surat/detailgatepasskeluar');
-		$this->load->view('template/foot');
-		$this->load->view('template/auth_footer');
 	}
 }

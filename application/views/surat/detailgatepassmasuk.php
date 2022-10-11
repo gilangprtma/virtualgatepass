@@ -30,7 +30,7 @@
                                                 <tr>
                                                     <th style="width: 200px;">Gate Pass Nomor</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th>730/GP/Q24046/VII/2022</th>
+                                                    <th><?= $ms['no_gatepass']; ?></th>
                                                     <th><?= date_indo($ms['tanggal_permohonan']); ?></th>
                                                 </tr>
                                                 <tr>

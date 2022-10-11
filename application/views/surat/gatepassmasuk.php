@@ -66,6 +66,14 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
+                                    <label for="form-label">Lampiran Surat (Opsional)</label>
+                                    <input type="file" id="lampiran" class="form-control" name="lampiran" value="<?= set_value('lampiran'); ?>">
+                                    <?= form_error('lampiran', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
                                     <label for="form-label">Pekerjaan</label>
                                     <input type="text" id="pekerjaan" class="form-control" name="pekerjaan" value="<?= set_value('pekerjaan'); ?>">
                                     <?= form_error('pekerjaan', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -88,7 +96,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="form-label">Unit</label>
                                     <input type="text" id="unit" class="form-control">
@@ -96,14 +104,23 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="form-label">Jumlah</label>
                                     <input type="text" id="jumlah" class="form-control">
                                     <?= form_error('jumlah[]', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                             </div>
+
                             <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="form-label">Foto</label>
+                                    <input type="file" id="foto" class="form-control">
+                                    <?= form_error('foto[]', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
                                 <label></label>
                                 <div class="buttons mt-2">
                                     <button class="btn btn-primary" type="button" id="add">
@@ -122,6 +139,7 @@
                                                         <th>Nama Barang</th>
                                                         <th>Unit</th>
                                                         <th>Jumlah</th>
+                                                        <th>Foto</th>
                                                         <th>Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -142,13 +160,13 @@
                             </div>
                         </div>-->
 
-                            <div class="col-lg-12">
+                            <!--<div class="col-lg-12">
                                 <label for="form-label">Foto Barang</label>
                                 <div class="custom-file">
                                     <input type="file" class="form-control" name="file" required>
-                                    <!-- <label class="custom-file-label">Choose file</label> -->
+                                    <label class="custom-file-label">Choose file</label>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <button type="submit" class="btn btn-secondary btn-lg mb-5" style="background-image:linear-gradient(6deg, #17ffd3 0%, #23e3ee 100%) ;">Submit</button>
@@ -180,6 +198,7 @@
             const nama_barang = $("#nama_barang").val();
             const unit = $("#unit").val();
             const jumlah = $("#jumlah").val();
+            const foto = $("#foto").val();
             const markup = `
                 <tr>
                     <td>
@@ -195,6 +214,10 @@
                         <input type="hidden" name="jumlah[]" value="${jumlah}" />
                     </td>
                     <td>
+                        ${foto}
+                        <input type="hidden" name="foto[]" value="${foto}" />
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-danger btn-sm remove-row" style=" padding: .25rem .5rem; font-size: .875rem; line-height: 1.5; border-radius: .2rem; ">
                             <i class="icofont-ui-close"></i>
                         </button>
@@ -202,13 +225,14 @@
                 </tr>
             `
 
-            if (nama_barang !== '' && unit !== '' && jumlah !== '') {
+            if (nama_barang !== '' && unit !== '' && jumlah !== '' && foto !== '') {
                 $("#content-table").append(markup);
 
                 // clear data
                 $("#nama_barang").val('');
                 $("#unit").val('');
                 $("#jumlah").val('');
+                $("#foto").val('');
             }
 
             displayOrNot()

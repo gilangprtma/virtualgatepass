@@ -9,9 +9,25 @@ class Admin_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+    public function getListKeluar()
+    {
+        $query = "SELECT * FROM `gatepasskeluar` ORDER BY `id` ASC";
+        return $this->db->query($query)->result_array();
+    }
+
     public function hitungGatePassMasuk()
     {
         $query = $this->db->get('gatepassmasuk');
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    public function hitungGatePassKeluar()
+    {
+        $query = $this->db->get('gatepasskeluar');
         if ($query->num_rows() > 0) {
             return $query->num_rows();
         } else {
@@ -32,6 +48,11 @@ class Admin_model extends CI_Model
     public function getById($id)
     {
         return $this->db->get_where('gatepassmasuk', ['id' => $id])->row_array();
+    }
+
+    public function getByIdK($id)
+    {
+        return $this->db->get_where('gatepasskeluar', ['id' => $id])->row_array();
     }
 
     public function appMasukMPS($id)

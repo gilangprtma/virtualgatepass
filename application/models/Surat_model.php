@@ -7,4 +7,9 @@ class Surat_model extends CI_Model
     {
         $this->db->insert('gatepassmasuk', $data);
     }
+
+    public function addGatepasskeluar($data)
+    {
+        $this->db->insert('gatepasskeluar', $data);
+    }
 }
