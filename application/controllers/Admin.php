@@ -74,6 +74,36 @@ class Admin extends CI_Controller
 		$this->load->view('template/auth_footer');
 	}
 
+	public function editgatepassmasuk($id)
+	{
+		$data['title'] = 'Edit Gate Pass Masuk';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$data['ms'] = $this->Admin_model->getById($id);
+
+		$this->form_validation->set_rules('tanggal_permohonan', 'Tanggal Permohonan', 'required|trim');
+		$this->form_validation->set_rules('dasar_pengiriman', 'Dasar Pengiriman', 'required|trim');
+		$this->form_validation->set_rules('pekerjaan', 'Pekerjaan', 'required|trim');
+		$this->form_validation->set_rules('dari', 'Dari', 'required|trim');
+		$this->form_validation->set_rules('dari', 'Dari', 'required|trim');
+		$this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim');
+		$this->form_validation->set_rules('unit', 'Unit', 'required|trim');
+		$this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required|trim');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('template/auth_header', $data);
+			$this->load->view('template/head', $data);
+			$this->load->view('template/sidebar', $data);
+			$this->load->view('surat/editgatepassmasuk', $data);
+			$this->load->view('template/foot');
+			$this->load->view('template/auth_footer');
+		}else{
+			$this->Admin_model->editMasuk();
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil Edit</div>');
+            redirect('admin/listgatepassmasuk');
+		}
+	}
+
 	public function detailgatepasskeluar($id)
 	{
 		$data['title'] = 'Detail Gate Pass Keluar';

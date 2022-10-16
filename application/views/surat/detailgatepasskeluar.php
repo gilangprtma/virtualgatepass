@@ -73,7 +73,7 @@
                                                     <th>Jumlah Barang</th>
                                                     <th>Unit</th>
                                                     <th>Nama Barang</th>
-                                                    <th>Keterangan</th>
+                                                    <th>Foto</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -82,7 +82,7 @@
                                                     <td><?= $ms['jumlah'];?></td>
                                                     <td><?= $ms['unit'];?></td>
                                                     <td><?= $ms['nama_barang'];?></td>
-                                                    <td><?= $ms['keterangan'];?></td>
+                                                    <td><?= $ms['foto'];?></td>
                                                 </tr>
                                             </tbody>
                                         </table>

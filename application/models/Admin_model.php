@@ -84,4 +84,19 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('gatepassmasuk', $data);
     }
+
+    public function editMasuk()
+    {
+        $data = [
+            'tanggal_permohonan' => htmlspecialchars($this->input->post('tanggal_permohonan', true)),
+            'dasar_pengiriman' => htmlspecialchars($this->input->post('dasar_pengiriman', true)),
+            'pekerjaan' => htmlspecialchars($this->input->post('pekerjaan', true)),
+            'dari' => htmlspecialchars($this->input->post('dari', true)),
+            'jumlah' => htmlspecialchars($this->input->post('jumlah', true)),
+            'unit' => htmlspecialchars($this->input->post('unit', true)),
+            'nama_barang' => htmlspecialchars($this->input->post('nama_barang', true))
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('gatepassmasuk', $data);
+    }
 }

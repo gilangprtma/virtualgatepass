@@ -28,7 +28,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($listkeluar as $m) : ?>
+                                    <?php foreach ($listkeluar as $m) : ?>
                                         <tr>
                                             <td><?= date_indo($m['tanggal_permohonan']); ?></td>
                                             <td><?= $m['no_gatepass']; ?></td>
@@ -52,6 +52,7 @@
                                                 ?>
                                             </td>
                                             <td>
+                                                <a href="<?= base_url('admin/editgatepasskeluar/' . $m['id']); ?>" class="text-primary">Edit</a> |
                                                 <a href="<?= base_url('admin/detailgatepasskeluar/' . $m['id']); ?>" class="text-warning">Detail</a>
                                                 <?php
                                                 if ($user['role_id'] == 1) { ?>

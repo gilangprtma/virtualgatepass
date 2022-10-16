@@ -44,6 +44,7 @@
                                             <option value="6">Pjs HSSE</option>
                                             <option value="4">FTM</option>
                                             <option value="7">Pjs FTM</option>
+                                            <option value="8">Security</option>
                                         </select>
                                         <?= form_error('role_id', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>

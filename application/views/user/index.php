@@ -54,8 +54,11 @@
                                                     }elseif($m['role_id']=='6'){?>
                                                         <span class="text-primary">Pjs HSSE</span>
                                                     <?php
-                                                    }else{?>
+                                                    }elseif($m['role_id']=='7'){?>
                                                         <span class="text-primary">Pjs FTM</span>
+                                                    <?php
+                                                    }else{?>
+                                                        <span class="text-primary">Security</span>
                                                     <?php
                                                     }
                                                 ?>

@@ -31,9 +31,10 @@ class Surat extends CI_Controller
             $this->load->view('surat/gatepassmasuk', $data);
             $this->load->view('template/footer');
         } else {
+            $email = $this->input->post('email', true);
             $data = [
                 'nama' => htmlspecialchars($this->input->post('nama', true)),
-                'email' => htmlspecialchars($this->input->post('email', true)),
+                'email' => htmlspecialchars($email),
                 'tanggal_permohonan' => htmlspecialchars($this->input->post('tanggal_permohonan', true)),
                 'dari' => htmlspecialchars($this->input->post('dari', true)),
                 'kepada' => 'PT. Patra Niaga FT Lomanis',
@@ -65,9 +66,44 @@ class Surat extends CI_Controller
                 }
             }
 
+            //$token = base64_encode(random_bytes(32));
+            //$cari_token = [
+            //    'email' => $email,
+            //    'token' => $token,
+            //    'date_created' => time()
+            //];
+
             $this->Surat_model->addGatepassmasuk($data);
+
+            //$this->_sendEmail();
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade" role="alert">Gate Pass Masuk Berhasil disimpan</div>');
             redirect('surat');
+        }
+    }
+
+    private function _sendEmail()
+    {
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'virtualgatepassftlomanis@gmail.com',
+            'smtp_pass' => 'bismillahberkah',
+            'smtp_port' => 456,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+        $this->email->from('virtualgatepassftlomanis@gmail.com', 'Virtual Gatepass FT Lomanis');
+        $this->email->to('pgilang11@gmail.com');
+        $this->email->subject('Gate Pass Masuk');
+        $this->email->message('Ini isi');
+
+        if($this->email->send()){
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
         }
     }
 

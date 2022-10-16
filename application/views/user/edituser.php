@@ -48,6 +48,19 @@
                                         </select>
                                         <?= form_error('role', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Aktif</label>
+                                        <select name="is_active" id="is_active" class="form-control">
+                                            <?php foreach ($is_active as $s) : ?>
+                                                <?php if ($s == $us['is_active']) : ?>
+                                                    <option value="<?= $s; ?>" selected><?= $s; ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $s; ?>"><?= $s; ?></option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <?= form_error('is_active', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
                                     
                                 </div>
                                 <button type="submit" class="btn btn-success">Ubah</button>
