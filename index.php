@@ -1,4 +1,10 @@
 <?php
+require 'vendor/autoload.php';
+
+// load dotenv
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 /**
  * CodeIgniter
  *
