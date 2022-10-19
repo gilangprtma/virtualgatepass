@@ -36,27 +36,27 @@
                                                 <tr>
                                                     <th style="width: 200px;">Dasar</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th><?= $ms['dasar_pengiriman'];?></th>
+                                                    <th><?= $ms['dasar_pengiriman']; ?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Pekerjaan</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th><?= $ms['pekerjaan'];?></th>
+                                                    <th><?= $ms['pekerjaan']; ?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Dari</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th><?= $ms['dari'];?></th>
+                                                    <th><?= $ms['dari']; ?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Untuk dikirim ke</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th><?= $ms['kepada'];?></th>
+                                                    <th><?= $ms['kepada']; ?></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 200px;">Atas tanggungan</th>
                                                     <th style="width: 45px;">:</th>
-                                                    <th><?= $ms['dari'];?></th>
+                                                    <th><?= $ms['dari']; ?></th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -77,35 +77,39 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td><?= $ms['jumlah'];?></td>
-                                                    <td><?= $ms['unit'];?></td>
-                                                    <td><?= $ms['nama_barang'];?></td>
-                                                    <td><?= $ms['foto'];?></td>
-                                                </tr>
+                                                <?php foreach ($ms['barang'] as $i => $barang) : ?>
+                                                    <tr>
+                                                        <td><?php echo $i + 1 ?></td>
+                                                        <td><?= $barang['jumlah']; ?></td>
+                                                        <td><?= $barang['unit']; ?></td>
+                                                        <td><?= $barang['nama']; ?></td>
+                                                        <td>
+                                                            <img src="<?= $barang['foto']; ?>" alt="<?= $barang['nama']; ?>" class="img-thumbnail" style="width:100px">
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <?php 
-                            if($ms['status']==0&$user['role_id']==2){ ?>
+
+                            <?php
+                            if ($ms['status'] == 0 & $user['role_id'] == 2) { ?>
                                 <div class="card-body">
-                                    <a href="<?= base_url('admin/approvemasukhsse/'.$ms['id']);?>" class="btn btn-primary">Setujui</a>
+                                    <a href="<?= base_url('admin/approvemasukhsse/' . $ms['id']); ?>" class="btn btn-primary">Setujui</a>
                                 </div>
-                            <?php }elseif($ms['status']==1&$user['role_id']==1){ ?>
+                            <?php } elseif ($ms['status'] == 1 & $user['role_id'] == 1) { ?>
                                 <div class="card-body">
-                                    <a href="<?= base_url('admin/approvemasukmps/'.$ms['id']);?>" class="btn btn-primary">Setujui</a>
+                                    <a href="<?= base_url('admin/approvemasukmps/' . $ms['id']); ?>" class="btn btn-primary">Setujui</a>
                                 </div>
-                                <?php
-                            }else{?>
+                            <?php
+                            } else { ?>
                                 <div class="card-body">
                                     <button type="button" class="btn mb-1 btn-primary" disabled="disabled">Setujui</button>
                                 </div>
                             <?php
-                                }
+                            }
                             ?>
                         </div>
                     </div>

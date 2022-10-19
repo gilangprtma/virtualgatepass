@@ -12,4 +12,11 @@ class Surat_model extends CI_Model
     {
         $this->db->insert('gatepasskeluar', $data);
     }
+
+    function getLastNumber($month, $year) {
+        return $this->db
+            ->query("SELECT COUNT(*) AS total FROM gatepassmasuk WHERE MONTH(tanggal_dibuat) = ? AND YEAR(tanggal_dibuat) = ?", [$month, $year])
+            ->row()
+            ->total;
+    }
 }

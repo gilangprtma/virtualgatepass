@@ -47,7 +47,22 @@ class Admin_model extends CI_Model
 
     public function getById($id)
     {
-        return $this->db->get_where('gatepassmasuk', ['id' => $id])->row_array();
+        $res = $this->db->get_where('gatepassmasuk', ['id' => $id])->row_array();
+        $nama_barang = explode(',', $res['nama_barang']);
+        $unit = explode(',', $res['unit']);
+        $jumlah = explode(',', $res['jumlah']);
+        $foto = explode(',', $res['foto']);
+
+        $res['barang'] = [];
+        foreach ($nama_barang as $i => $n) {
+            $res['barang'][] = [
+                'nama' => $n,
+                'unit' => $unit[$i],
+                'jumlah' => $jumlah[$i],
+                'foto' => base_url('/assets/upload/' . $foto[$i]),
+            ];
+        }
+        return $res;
     }
 
     public function getByIdK($id)

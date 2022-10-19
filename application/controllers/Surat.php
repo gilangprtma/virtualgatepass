@@ -24,7 +24,7 @@ class Surat extends CI_Controller
         $this->form_validation->set_rules('nama_barang[]', 'Nama Barang', 'trim|required');
         $this->form_validation->set_rules('unit[]', 'Unit', 'trim|required');
         $this->form_validation->set_rules('jumlah[]', 'Jumlah', 'trim|required');
-        $this->form_validation->set_rules('foto[]', 'Foto', 'trim|required');
+        // $this->form_validation->set_rules('foto[]', 'Foto', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('template/header', $data);
@@ -44,10 +44,8 @@ class Surat extends CI_Controller
                 'nama_barang' => implode(',', $this->input->post('nama_barang')),
                 'unit' => implode(',', $this->input->post('unit')),
                 'jumlah' => implode(',', $this->input->post('jumlah')),
-                'tanggal_dibuat' => now_carbon()->format('Y-m-d'),
 
-                // nomor surat
-                'no_gatepass' => 'GP/Q24046/' . time(),
+                'tanggal_dibuat' => now_carbon()->format('Y-m-d'),
             ];
 
             if (isset($_FILES['file'])) {
@@ -61,9 +59,36 @@ class Surat extends CI_Controller
                     if ($this->upload->do_upload('file')) {
                         $data['upload'] = $this->upload->data('file_name');
                     } else {
-                        echo $this->upload->display_errors();
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show fade" role="alert">' . $this->upload->display_errors() . '</div>');
+                        redirect('surat');
                     }
                 }
+            }
+
+            if (isset($_FILES['foto'])) {
+                $fotos = [];
+                foreach ($_FILES['foto']['name'] as $i => $file) {
+                    // Define new $_FILES array - $_FILES['file']
+                    $_FILES['foto_single']['name'] = $_FILES['foto']['name'][$i];
+                    $_FILES['foto_single']['type'] = $_FILES['foto']['type'][$i];
+                    $_FILES['foto_single']['tmp_name'] = $_FILES['foto']['tmp_name'][$i];
+                    $_FILES['foto_single']['error'] = $_FILES['foto']['error'][$i];
+                    $_FILES['foto_single']['size'] = $_FILES['foto']['size'][$i];
+
+                    $config['allowed_types'] = 'jpg|png|gif|jpeg';
+                    $config['max_size'] = '3072';
+                    $config['upload_path'] = './assets/upload/';
+                    $config['encrypt_name'] = true;
+
+                    $this->load->library('upload', $config);
+                    if ($this->upload->do_upload('foto_single')) {
+                        $fotos[] = $this->upload->data('file_name');
+                    } else {
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show fade" role="alert">'. $this->upload->display_errors() .'</div>');
+                        redirect('surat');
+                    }
+                }
+                $data['foto'] = implode(',', $fotos);
             }
 
             //$token = base64_encode(random_bytes(32));
@@ -73,6 +98,8 @@ class Surat extends CI_Controller
             //    'date_created' => time()
             //];
 
+            $number = $this->Surat_model->getLastNumber(now_carbon()->month, now_carbon()->year) + 1;
+            $data['no_gatepass'] = str_pad($number, 3, '0', STR_PAD_LEFT) . '/GPM/' . now_carbon()->month . '/' . now_carbon()->year;
             $this->Surat_model->addGatepassmasuk($data);
 
             //$this->_sendEmail();
