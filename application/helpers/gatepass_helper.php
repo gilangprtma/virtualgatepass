@@ -29,3 +29,8 @@ function now_carbon(): Carbon
 {
     return Carbon::now('GMT+7')->locale('id');
 }
+
+function carbon_parse(int $time): Carbon
+{
+    return Carbon::createFromTimestamp($time, 'GMT+7');
+}

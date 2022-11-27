@@ -23,7 +23,7 @@
 
             <!-- LOGIN -->
             <div class="col-lg-5 col-md-5 col-sm-12">
-                <form method="POST" class="form row" id="login-form" action="<?= base_url('welcome'); ?>">
+                <form method="POST" class="form row" id="login-form" action="<?= base_url('auth'); ?>">
                     <div class="col-lg-11 col-md-11 col-sm-12">
                         <h2 class="mb-3 mt-3" style="font-size: 2rem; font-family: Poppins, sans-serif;">LOGIN</h2>
                         <?= $this->session->flashdata('message'); ?>
@@ -41,7 +41,7 @@
                     <div class="form-group input col-lg-11 col-md-11 col-sm-12">
                         <div class="input-group">
                             <input type="password" class="form-control" placeholder="Password" name="password">
-                            
+
                         </div>
                         <?= form_error('password', '<small class="text-danger pl-2">', '</small>'); ?>
                     </div>
@@ -58,7 +58,7 @@
 </section>
 
 <!-- MODAL -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="box-surat-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -69,7 +69,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="">
+                <form id="form-search" action="<?php echo base_url('/surat/get_by_no') ?>">
                     <div class="form-group input col-lg-11 col-md-11 col-sm-12 with-footman">
                         <label class="label-form" style="color:black;">Masukan Nomor Surat Anda </label>
                         <div class="input-group mb-3">
@@ -78,23 +78,25 @@
                         <button type="submit" class="btn btn-primary">Cari</button>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="mb-1 mt-1" style="font-size: 1rem; font-family: Poppins, sans-serif;" id="myLargeModalLabel">Tracking Surat</h4>
+                <div class="container" id="loading-view">
+                    <div class="row text-center justify-content-center">
+                        <div class="col-md-10">
+                            <p class="text-muted">Loading...</p>
+                        </div>
+                    </div>
+                </div>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
+                <div class="container" id="not-found-view">
+                    <div class="row text-center justify-content-center">
+                        <div class="col-md-10">
+                            <h3 class="font-weight-bold">Data Tidak Ditemukan</h3>
+                            <p class="text-muted">Surat dengan nomor tersebut tidak ditemukan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" id="data-view">
                     <div class="row text-center justify-content-center mb-5">
                         <div class="col-xl-6 col-lg-8">
                             <h3 class="font-weight-bold">Status Surat Anda</h3>
@@ -104,31 +106,8 @@
 
                     <div class="row">
                         <div class="col">
-                            <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-                                <div class="timeline-step">
-                                    <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
-                                        <div class="inner-circle"></div>
-                                        <p class="h6 mt-3 mb-1">HSSE</p>
-                                        <p class="h6 mb-0 mb-lg-0" style="color:chartreuse;">Approve</p>
-                                        <p class="h6 mb-0 mb-lg-0">02 Sep 2022</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-step">
-                                    <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
-                                        <div class="inner-circle"></div>
-                                        <p class="h6 mt-3 mb-1">MPS</p>
-                                        <p class="h6 mb-0 mb-lg-0" style="color:chartreuse;">Approve</p>
-                                        <p class="h6 mb-0 mb-lg-0">02 Sep 2022</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-step">
-                                    <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
-                                        <div class="inner-circle"></div>
-                                        <p class="h6 mt-3 mb-1">FTM</p>
-                                        <p class="h6 mb-0 mb-lg-0" style="color:chartreuse;">Approve</p>
-                                        <p class="h6 mb-0 mb-lg-0">04 Sep 2022</p>
-                                    </div>
-                                </div>
+                            <div class="timeline-steps aos-init aos-animate" data-aos="fade-up" id="timeline-data">
+                                
                             </div>
                         </div>
                     </div>

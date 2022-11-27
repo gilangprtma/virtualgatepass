@@ -108,6 +108,34 @@ class Surat extends CI_Controller
         }
     }
 
+    public function get_by_no()
+    {
+        $no = $this->input->get('no');
+        $data = $this->Surat_model->getByNo($no);
+        if (!$data) {
+            $this->output
+                ->set_content_type('json')
+                ->set_status_header(400)
+                ->set_output(
+                json_encode([
+                    'success' => false,
+                    'data' => (object) [],
+                ])
+            );
+            return;
+        }
+
+        $this->output
+        ->set_content_type('json')
+        ->set_status_header(200)
+        ->set_output(
+            json_encode([
+                'success' => true,
+                'data' => $data,
+            ])
+        );
+    }
+
     private function _sendEmail()
     {
         $config = [

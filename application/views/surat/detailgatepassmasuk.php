@@ -70,9 +70,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Jumlah Barang</th>
-                                                    <th>Unit</th>
                                                     <th>Nama Barang</th>
+                                                    <th>Unit</th>
+                                                    <th>Jumlah Barang</th>
                                                     <th>Foto</th>
                                                 </tr>
                                             </thead>
@@ -80,9 +80,9 @@
                                                 <?php foreach ($ms['barang'] as $i => $barang) : ?>
                                                     <tr>
                                                         <td><?php echo $i + 1 ?></td>
-                                                        <td><?= $barang['jumlah']; ?></td>
-                                                        <td><?= $barang['unit']; ?></td>
                                                         <td><?= $barang['nama']; ?></td>
+                                                        <td><?= $barang['unit']; ?></td>
+                                                        <td><?= $barang['jumlah']; ?></td>
                                                         <td>
                                                             <img src="<?= $barang['foto']; ?>" alt="<?= $barang['nama']; ?>" class="img-thumbnail" style="width:100px">
                                                         </td>

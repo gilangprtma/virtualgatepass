@@ -86,9 +86,9 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('pekerjaan', 'Pekerjaan', 'required|trim');
 		$this->form_validation->set_rules('dari', 'Dari', 'required|trim');
 		$this->form_validation->set_rules('dari', 'Dari', 'required|trim');
-		$this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim');
-		$this->form_validation->set_rules('unit', 'Unit', 'required|trim');
-		$this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required|trim');
+		$this->form_validation->set_rules('nama_barang[]', 'Nama Barang', 'trim|required');
+		$this->form_validation->set_rules('unit[]', 'Unit', 'trim|required');
+		$this->form_validation->set_rules('jumlah[]', 'Jumlah', 'trim|required');
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('template/auth_header', $data);

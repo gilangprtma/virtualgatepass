@@ -60,6 +60,7 @@ class Admin_model extends CI_Model
                 'unit' => $unit[$i],
                 'jumlah' => $jumlah[$i],
                 'foto' => base_url('/assets/upload/' . $foto[$i]),
+                'foto_original' => $foto[$i],
             ];
         }
         return $res;
@@ -107,10 +108,11 @@ class Admin_model extends CI_Model
             'dasar_pengiriman' => htmlspecialchars($this->input->post('dasar_pengiriman', true)),
             'pekerjaan' => htmlspecialchars($this->input->post('pekerjaan', true)),
             'dari' => htmlspecialchars($this->input->post('dari', true)),
-            'jumlah' => htmlspecialchars($this->input->post('jumlah', true)),
-            'unit' => htmlspecialchars($this->input->post('unit', true)),
-            'nama_barang' => htmlspecialchars($this->input->post('nama_barang', true))
+            'nama_barang' => implode(',', $this->input->post('nama_barang')),
+            'unit' => implode(',', $this->input->post('unit')),
+            'jumlah' => implode(',', $this->input->post('jumlah')),
         ];
+
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('gatepassmasuk', $data);
     }
